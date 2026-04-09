@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pod H XGBoost Summary</title>
+  <style>
+    :root {
+      --bg: #f7f7f2;
+      --panel: #fffdfa;
+      --ink: #1e293b;
+      --muted: #5f6b7a;
+      --line: #e5e7eb;
+      --brand: #0f766e;
+      --brand-soft: #d1fae5;
+      --accent: #0ea5e9;
+      --warn: #b45309;
+      --danger: #b91c1c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 90% -10%, #dcfce7 0%, transparent 42%),
+        radial-gradient(circle at -10% 110%, #e0f2fe 0%, transparent 38%),
+        var(--bg);
+      line-height: 1.55;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 28px 18px 44px;
+    }
+
+    .hero {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: var(--brand-soft);
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      padding: 5px 11px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+      font-size: clamp(1.7rem, 3.3vw, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .kpis {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .label {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .value {
+      margin-top: 4px;
+      font-size: 1.55rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .ok { color: var(--brand); }
+    .mid { color: var(--warn); }
+    .bad { color: var(--danger); }
+
+    h2 {
+      margin: 0 0 8px;
+      font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+      font-size: 1.22rem;
+      letter-spacing: -0.01em;
+    }
+
+    .two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .list li { margin: 6px 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      padding: 9px 8px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .callout {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--brand);
+      background: #ecfeff;
+      border-radius: 8px;
+    }
+
+    .mono {
+      background: #0b1220;
+      color: #dbeafe;
+      border-radius: 10px;
+      padding: 12px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", "SFMono-Regular", monospace;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .footer {
+      margin-top: 14px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 900px) {
+      .kpis, .two { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .kpis, .two { grid-template-columns: 1fr; }
+      .container { padding: 16px 12px 28px; }
+      .hero, .card { padding: 14px; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="eyebrow">Pod H • XGBoost Final Summary</div>
+      <h1>Pod H XGBoost Pipeline Summary</h1>
+      <p>
+        This page keeps only the information needed for review and handoff:
+        core method, validation numbers, reliability checks, and how to rerun.
+      </p>
+    </section>
+
+    <section class="grid kpis">
+      <div class="card">
+        <div class="label">Revenue within 10%</div>
+        <div class="value ok">83.33%</div>
+      </div>
+      <div class="card">
+        <div class="label">Revenue MAPE</div>
+        <div class="value ok">6.50%</div>
+      </div>
+      <div class="card">
+        <div class="label">Clicks within 10%</div>
+        <div class="value mid">79.17%</div>
+      </div>
+      <div class="card">
+        <div class="label">Conversion within 10%</div>
+        <div class="value bad">59.17%</div>
+      </div>
+    </section>
+
+    <section class="grid two">
+      <div class="card">
+        <h2>1) Pipeline in 4 steps</h2>
+        <ol class="list">
+          <li>Load raw data and clean date fields.</li>
+          <li>Aggregate daily targets and ad metrics.</li>
+          <li>Create lag/rolling/calendar feature table.</li>
+          <li>Run recursive rolling backtest, then 30-day forecast.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>2) Why this is trustworthy</h2>
+        <ul class="list">
+          <li>Evaluation is recursive (multi-step), matching real forecast usage.</li>
+          <li>Lag features use raw history to avoid train-vs-forecast scale mismatch.</li>
+          <li>Same-day ad leakage was removed (previous-day and lagged ad features only).</li>
+          <li>Forecast interval uses out-of-fold error quantile from backtest.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2>3) Validation numbers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Target</th>
+            <th>Avg MAPE</th>
+            <th>Avg within 10%</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Revenue</td>
+            <td>6.50%</td>
+            <td>83.33%</td>
+            <td>Selected for final delivery</td>
+          </tr>
+          <tr>
+            <td>Clicks</td>
+            <td>6.53%</td>
+            <td>79.17%</td>
+            <td>Near target but below 80%</td>
+          </tr>
+          <tr>
+            <td>Conversion_Rate</td>
+            <td>10.24%</td>
+            <td>59.17%</td>
+            <td>Needs additional feature work</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <strong>Final decision:</strong> single Revenue XGBoost model only.
+      </div>
+    </section>
+
+    <section class="grid two" style="margin-top:14px;">
+      <div class="card">
+        <h2>4) Main feature groups used</h2>
+        <ul class="list">
+          <li>Calendar: day/week/month/quarter, weekend, month-end, holiday flags.</li>
+          <li>Autoregressive lags: 1, 2, 3, 7, 14, 21, 28, 35, 56.</li>
+          <li>Rolling stats: mean/std/min/max over 3/7/14/28-day windows.</li>
+          <li>Ad lags: spend, CTR, CPC on previous day and 7/14-day lags.</li>
+          <li>Interaction features: lag differences and short-vs-long rolling differences.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>5) Delivery files</h2>
+        <ul class="list">
+          <li><strong>Code:</strong> utils.py, build_features.py, backtest.py, forecast_30d.py</li>
+          <li><strong>Output:</strong> metrics.json and forecast_30d.csv</li>
+          <li><strong>Notebook:</strong> XGBOOST_PIPELINE_SUMMARY.ipynb (full result display)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2>6) Reproduce in order</h2>
+      <div class="mono">/opt/homebrew/bin/python3.13 rebuild_xgboost_pipeline/build_features.py
+/opt/homebrew/bin/python3.13 rebuild_xgboost_pipeline/backtest.py --target Revenue
+/opt/homebrew/bin/python3.13 rebuild_xgboost_pipeline/forecast_30d.py --target Revenue</div>
+    </section>
+
+    <div class="footer">Pod H · concise XGBoost summary · updated to current validated metrics</div>
+  </div>
+</body>
+</html>
