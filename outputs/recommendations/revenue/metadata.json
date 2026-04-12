@@ -1,0 +1,18 @@
+{
+  "target": "Revenue",
+  "horizon_days": 30,
+  "scenario_names": [
+    "light_push",
+    "standard_push",
+    "aggressive_push",
+    "heavy_push"
+  ],
+  "min_uplift_pct": 0.003,
+  "max_interval_width_pct": 0.27,
+  "year_end_relaxation": 0.15,
+  "ad_cost_weight": 0.1,
+  "top_n": 5,
+  "recency_half_life_days": null,
+  "rows_considered": 120,
+  "rows_recommended": 60
+}
