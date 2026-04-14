@@ -110,7 +110,7 @@ def run_backtest(target: str, recency_half_life_days: float | None = None) -> No
         "avg_within_10": float(np.mean([r["within_10"] for r in backtest_results])),
         "recency_half_life_days": recency_half_life_days,
         # Used later by forecast_30d.py to build 85% prediction intervals.
-        "abs_error_quantile_925": float(np.quantile([err for fold in backtest_results for err in fold["abs_errors"]], 0.925)),
+        "abs_error_quantile_85": float(np.quantile([err for fold in backtest_results for err in fold["abs_errors"]], 0.85)),
     }
 
     out_dir = root_path() / "projects" / "synthetic_ecommerce_data" / "outputs" / "backtests" / target.lower()

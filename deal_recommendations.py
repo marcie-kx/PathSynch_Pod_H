@@ -121,7 +121,9 @@ def load_interval_half_width(
     """Load the 85% interval half-width from backtest output, with a training fallback."""
     if metrics_path.exists():
         metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
-        half_width = float(metrics.get("summary", {}).get("abs_error_quantile_925", 0.0))
+        summary = metrics.get("summary", {})
+        # Prefer strict 85% key; keep legacy fallback for older artifacts.
+        half_width = float(summary.get("abs_error_quantile_85", summary.get("abs_error_quantile_925", 0.0)))
         if half_width > 0:
             return half_width
 
@@ -130,7 +132,7 @@ def load_interval_half_width(
     train_preds = inverse_transform(train_preds_transformed, config.transform)
     y_train_original = inverse_transform(y_train, config.transform)
     residuals = np.abs(y_train_original - train_preds)
-    return float(np.quantile(residuals, 0.925))
+    return float(np.quantile(residuals, 0.85))
 
 
 def build_baseline_and_scenario_forecasts(

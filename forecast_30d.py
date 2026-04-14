@@ -54,7 +54,9 @@ def run_forecast(target: str, recency_half_life_days: float | None = None) -> No
     if metrics_path.exists():
         # Preferred interval source: out-of-fold absolute errors from backtest.
         metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
-        quantile_85 = float(metrics.get("summary", {}).get("abs_error_quantile_925", 0.0))
+        summary = metrics.get("summary", {})
+        # Prefer strict 85% key; keep legacy fallback for older artifacts.
+        quantile_85 = float(summary.get("abs_error_quantile_85", summary.get("abs_error_quantile_925", 0.0)))
 
     if quantile_85 is None or quantile_85 <= 0:
         # Fallback when backtest metrics are unavailable.
@@ -62,7 +64,7 @@ def run_forecast(target: str, recency_half_life_days: float | None = None) -> No
         train_preds = inverse_transform(train_preds_transformed, config.transform)
         y_train_original = inverse_transform(y_train, config.transform)
         residuals = np.abs(y_train_original - train_preds)
-        quantile_85 = float(np.quantile(residuals, 0.925))
+        quantile_85 = float(np.quantile(residuals, 0.85))
 
     lower_bounds = np.maximum(preds - quantile_85, 0)
     upper_bounds = preds + quantile_85
