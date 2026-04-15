@@ -143,7 +143,7 @@ def build_baseline_and_scenario_forecasts(
     scenario_ad_metrics: dict[str, pd.Series],
     interval_half_width: float,
 ) -> pd.DataFrame:
-    """Create baseline/scenario forecasts and baseline confidence intervals."""
+    """Create baseline/scenario forecasts and baseline empirical forecast intervals."""
     baseline_pred_t = recursive_forecast(model, history_raw, future_dates, config, baseline_ad_metrics)
     scenario_pred_t = recursive_forecast(model, history_raw, future_dates, config, scenario_ad_metrics)
 

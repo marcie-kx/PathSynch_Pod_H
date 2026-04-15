@@ -223,7 +223,7 @@
           <li>Evaluation is recursive (multi-step), matching real forecast usage.</li>
           <li>Lag features use raw history to avoid train-vs-forecast scale mismatch.</li>
           <li>Same-day ad leakage was removed (previous-day and lagged ad features only).</li>
-          <li>Forecast interval uses out-of-fold error quantile from backtest.</li>
+          <li>Forecast interval is an empirical forecast interval built from the out-of-fold error quantile from backtest.</li>
         </ul>
       </div>
     </section>

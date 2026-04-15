@@ -5,7 +5,7 @@ from __future__ import annotations
 
 Highlights:
 - Uses the same recursive mechanics as backtest for consistency.
-- Builds 85% intervals from backtest out-of-fold error quantiles when available.
+- Builds empirical forecast intervals from backtest out-of-fold absolute error quantiles when available.
 """
 
 import argparse
@@ -77,7 +77,7 @@ def run_forecast(target: str, recency_half_life_days: float | None = None) -> No
         "upper_85": upper_bounds
     })
     forecast_df.to_csv(out_dir / "forecast_30d.csv", index=False)
-    print(f"Saved 30-day forecast with 85% CI for {target} to {out_dir / 'forecast_30d.csv'}")
+    print(f"Saved 30-day forecast with empirical forecast interval for {target} to {out_dir / 'forecast_30d.csv'}")
 
 
 if __name__ == "__main__":
